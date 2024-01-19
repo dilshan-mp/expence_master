@@ -1,4 +1,11 @@
 
+
+
+import 'package:uuid/uuid.dart';
+
+//create a unique id using uuid
+dynamic uuid = const Uuid().v4();
+
 enum Category{food,travel,leasure,work}
 
 //constructor 
@@ -9,8 +16,8 @@ class ExpenceModel{
     required this.title,
     required this.category
   })
-  :id = "001";
-  
+  :id = uuid;
+
   final String id;
   final String title;
   final double amount;
