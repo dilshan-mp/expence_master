@@ -1,4 +1,5 @@
 import 'package:expence_master/models/expence.dart';
+import 'package:expence_master/widgets/expence_tile.dart';
 import 'package:flutter/material.dart';
 
 class ExpenceList extends StatelessWidget {
@@ -11,7 +12,12 @@ final List<ExpenceModel> expenceList;
             child: ListView.builder(
               itemCount: expenceList.length,
               itemBuilder: (context,index){
-              return Text(expenceList[index].title);
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: ExpenceTile(
+                  expence: expenceList[index],
+                ),
+              );
             }),
           );
   }
