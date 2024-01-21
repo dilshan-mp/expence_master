@@ -17,6 +17,30 @@ class _AddNewExpencesState extends State<AddNewExpences> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   Category _selectedCategory = Category.leasure;
+  //date variable
+  final DateTime initialDate = DateTime.now();
+  final DateTime firstDate = DateTime(DateTime.now().year-1,DateTime.now().month,DateTime.now().day);
+  final DateTime lastDate = DateTime(DateTime.now().year+1,DateTime.now().month,DateTime.now().day);
+
+  DateTime _selectedDate = DateTime.now();
+//date picker
+Future <void> _openDateModal()async{
+  try{
+    //show the date model then store the user selected date
+   final pickDate = await showDatePicker(
+      context: context,
+       firstDate: firstDate,
+        lastDate: lastDate
+      );
+      setState(() {
+        _selectedDate = pickDate!;
+      });
+
+  }catch(err){
+    print(err.toString());
+  }
+}
+
   @override
 
   /*title walata wen wela thiynawa space eka in krnawa stete ek ain wenakota*/ 
@@ -56,16 +80,19 @@ class _AddNewExpencesState extends State<AddNewExpences> {
                 child:Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text("2023/2/2"),
+                    Text(fomattedData.format(_selectedDate)),
                     IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.date_range_outlined),
+                      onPressed: (){
+                        _openDateModal();
+                      },
+                      icon: const Icon(Icons.date_range_outlined),
                     )
                   ],
                 ) ,
               ), 
             ],
           ),
+          const SizedBox(height: 10,),
           Row(
             children: [
               DropdownButton(
