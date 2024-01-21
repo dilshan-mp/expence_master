@@ -1,6 +1,7 @@
 
 
 
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
@@ -13,6 +14,15 @@ final fomattedData = DateFormat.yMd();
 
 //enu for category
 enum Category{food,travel,leasure,work}
+
+// ignore: non_constant_identifier_names
+final CategoryIcons = {
+  Category.food : Icons.lunch_dining,
+  Category.travel : Icons.travel_explore,
+  Category.leasure : Icons.leak_add,
+  Category.work : Icons.work
+
+};
 
 //constructor 
 class ExpenceModel{

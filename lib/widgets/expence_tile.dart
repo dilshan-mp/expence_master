@@ -24,7 +24,8 @@ class ExpenceTile extends StatelessWidget {
                           const Spacer(),
                           Row(
                             children: [
-                              const Icon(Icons.trending_down),
+                              Icon(CategoryIcons[expence.category]),
+                              //const Icon(Icons.trending_down),
                               const SizedBox(
                                 width: 8,
                               ),
@@ -36,6 +37,6 @@ class ExpenceTile extends StatelessWidget {
                     ],
                   ),
                 ),
-              );;
+              );
   }
 }
