@@ -28,7 +28,7 @@ class ExpenceTile extends StatelessWidget {
                               const SizedBox(
                                 width: 8,
                               ),
-                              Text(expence.date.toString())
+                              Text(expence.getFormatedData)
                             ],
                           )
                         ],
