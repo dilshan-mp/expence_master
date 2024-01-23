@@ -3,7 +3,8 @@ import 'package:expence_master/widgets/expence_tile.dart';
 import 'package:flutter/material.dart';
 
 class ExpenceList extends StatelessWidget {
-  const ExpenceList({super.key,required this.expenceList});
+  final void Function(ExpenceModel) onDeleteExpence;
+  const ExpenceList({super.key,required this.expenceList,required this.onDeleteExpence});
 
 final List<ExpenceModel> expenceList;
   @override
@@ -14,8 +15,15 @@ final List<ExpenceModel> expenceList;
               itemBuilder: (context,index){
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
-                child: ExpenceTile(
-                  expence: expenceList[index],
+                child: Dismissible(
+                  key: ValueKey(expenceList[index]),
+                  direction: DismissDirection.startToEnd,
+                  onDismissed: (direction) {
+                    onDeleteExpence(expenceList[index]);
+                  },
+                  child: ExpenceTile(
+                    expence: expenceList[index],
+                  ),
                 ),
               );
             }),

@@ -39,6 +39,7 @@ Future <void> _openDateModal()async{
       });
 
   }catch(err){
+    // ignore: avoid_print
     print(err.toString());
   }
 }
@@ -53,8 +54,8 @@ void _handleFormSubmit(){
       context: context,
       builder: (context){
         return(AlertDialog(
-          title: Text("Enter valid Data"),
-          content: Text("please enter valid data for the title and amount her the title cant be empty and the amount cant be less than zero") ,
+          title: const Text("Enter valid Data"),
+          content: const Text("please enter valid data for the title and amount her the title cant be empty and the amount cant be less than zero") ,
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(

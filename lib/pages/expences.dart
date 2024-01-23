@@ -32,6 +32,13 @@ class _ExpencesState extends State<Expences> {
     
   }
 
+  //remove a expence
+  void onDeleteExpence(ExpenceModel expence){
+    setState(() {
+      _expenceList.remove(expence);
+    });
+  }
+
   //function to open a model overlay
   void _openAddExpencesOverlay(){
     showModalBottomSheet(context: context, builder:(context) {
@@ -62,7 +69,7 @@ class _ExpencesState extends State<Expences> {
       ),
       body:  Column(
         children: [
-          ExpenceList(expenceList: _expenceList)
+          ExpenceList(expenceList: _expenceList,onDeleteExpence: onDeleteExpence,)
         ],
       ),
     );
