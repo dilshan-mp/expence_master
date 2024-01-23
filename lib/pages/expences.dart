@@ -24,11 +24,18 @@ class _ExpencesState extends State<Expences> {
          category: Category.food
          ),
   ];
+  //Add new expence
+  void onAddNewExpence(ExpenceModel expence){
+    setState(() {
+      _expenceList.add(expence);
+    });
+    
+  }
 
   //function to open a model overlay
   void _openAddExpencesOverlay(){
     showModalBottomSheet(context: context, builder:(context) {
-      return AddNewExpences();
+      return  AddNewExpences(onAddExpence:onAddNewExpence ,);
     },
    );
   }

@@ -12,7 +12,7 @@ class ExpenceTile extends StatelessWidget {
       color: Colors.white,
       elevation: 1,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

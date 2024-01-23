@@ -1,13 +1,15 @@
-//import 'dart:ffi';
+
+
+// ignore: avoid_web_libraries_in_flutter
+//import 'dart:js';
 
 import 'package:expence_master/models/expence.dart';
 import 'package:flutter/material.dart';
-//import 'package:expence_master/models/expence.dart';
-
-//import '../models/expence.dart';
 
 class AddNewExpences extends StatefulWidget {
-  const AddNewExpences({super.key});
+
+ final void Function(ExpenceModel expence) onAddExpence;
+  const AddNewExpences({super.key,required this.onAddExpence});
 
   @override
   State<AddNewExpences> createState() => _AddNewExpencesState();
@@ -41,15 +43,52 @@ Future <void> _openDateModal()async{
   }
 }
 
+void _handleFormSubmit(){
+  //form validtion
+  //conver the amount in to the dounle
+  final userAmount = double.parse(_amountController.text.trim()) ;
+  // ignore: unnecessary_null_comparison
+  if (_titleController.text.trim().isEmpty || userAmount ==0) {
+    showDialog(
+      context: context,
+      builder: (context){
+        return(AlertDialog(
+          title: Text("Enter valid Data"),
+          content: Text("please enter valid data for the title and amount her the title cant be empty and the amount cant be less than zero") ,
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('close'),
+              onPressed: () {
+                Navigator.of(context).pop();//back wena eka wenne
+              },
+            ),
+          ],
+          )
+        );
+      }
+    );
+ }else{
+  //create the new expence
+  ExpenceModel newExpence = ExpenceModel(amount: userAmount, date:_selectedDate, title: _titleController.text.trim(), category: _selectedCategory);
+  //save the data
+  widget.onAddExpence(newExpence);
+  Navigator.pop(context);
+ }
+}
+
   @override
 
   /*title walata wen wela thiynawa space eka in krnawa stete ek ain wenakota*/ 
-  void dispose(){
-    super.dispose();
-    _titleController.dispose();
-    _amountController:dispose();
-  }
+  // void dispose(){
+  //  super.dispose();
+  //   _titleController.dispose();
+  //   _amountController:dispose();
+  // }
 
+  @override
   Widget build(BuildContext context) {
     return  Padding(
       padding: const EdgeInsets.all(16.0),
@@ -97,6 +136,7 @@ Future <void> _openDateModal()async{
             children: [
               DropdownButton(
                 value: _selectedCategory,
+                // ignore: non_constant_identifier_names
                 items:Category.values.map((Category) => DropdownMenuItem(
                   value: Category ,
                   child: Text(Category.name),
@@ -113,7 +153,9 @@ Future <void> _openDateModal()async{
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     ElevatedButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
                        style: const ButtonStyle(
                         backgroundColor:MaterialStatePropertyAll(Colors.redAccent),
                         ),
@@ -121,7 +163,7 @@ Future <void> _openDateModal()async{
                       ),
                       const SizedBox(width: 10,),
                     ElevatedButton(
-                      onPressed: (){},
+                      onPressed: _handleFormSubmit,
                        style: const ButtonStyle(
                         backgroundColor:MaterialStatePropertyAll(Colors.greenAccent)
                         ),
